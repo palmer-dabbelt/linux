@@ -13,11 +13,13 @@
 
 #define	FLAT_VERSION			0x00000004L
 
+#ifdef __KERNEL__
 #ifdef CONFIG_BINFMT_SHARED_FLAT
 #define	MAX_SHARED_LIBS			(4)
 #else
 #define	MAX_SHARED_LIBS			(1)
 #endif
+#endif /*__KERNEL__*/
 
 /*
  * To make everything easier to port and manage cross platform
