@@ -61,6 +61,7 @@ struct epoll_event {
 	__u64 data;
 } EPOLL_PACKED;
 
+#ifdef __KERNEL__
 #ifdef CONFIG_PM_SLEEP
 static inline void ep_take_care_of_epollwakeup(struct epoll_event *epev)
 {
@@ -73,4 +74,6 @@ static inline void ep_take_care_of_epollwakeup(struct epoll_event *epev)
 	epev->events &= ~EPOLLWAKEUP;
 }
 #endif
+#endif /*__KERNEL__*/
+
 #endif /* _UAPI_LINUX_EVENTPOLL_H */
