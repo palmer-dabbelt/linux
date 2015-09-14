@@ -1363,7 +1363,7 @@ static inline void fill_note(struct memelfnote *note, const char *name, int type
  * fill up all the fields in prstatus from the given task struct, except
  * registers which need to be filled up separately.
  */
-static void fill_prstatus(struct elf_prstatus *prstatus,
+static void fill_prstatus(struct elf_fdpic_prstatus *prstatus,
 			  struct task_struct *p, long signr)
 {
 	prstatus->pr_info.si_signo = prstatus->pr_cursig = signr;
@@ -1446,7 +1446,7 @@ static int fill_psinfo(struct elf_prpsinfo *psinfo, struct task_struct *p,
 struct elf_thread_status
 {
 	struct list_head list;
-	struct elf_prstatus prstatus;	/* NT_PRSTATUS */
+	struct elf_fdpic_prstatus prstatus;	/* NT_PRSTATUS */
 	elf_fpregset_t fpu;		/* NT_PRFPREG */
 	struct task_struct *thread;
 #ifdef ELF_CORE_COPY_XFPREGS
@@ -1579,7 +1579,7 @@ static int elf_fdpic_core_dump(struct coredump_params *cprm)
 	loff_t offset = 0, dataoff;
 	int numnote;
 	struct memelfnote *notes = NULL;
-	struct elf_prstatus *prstatus = NULL;	/* NT_PRSTATUS */
+	struct elf_fdpic_prstatus *prstatus = NULL;	/* NT_PRSTATUS */
 	struct elf_prpsinfo *psinfo = NULL;	/* NT_PRPSINFO */
  	LIST_HEAD(thread_list);
  	struct list_head *t;
